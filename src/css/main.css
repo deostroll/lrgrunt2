@@ -56,7 +56,10 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
-
+code {
+    background-color: lightgrey;    
+    padding: 0px 5px 0px 5px;
+}
 
 
 
