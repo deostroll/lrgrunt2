@@ -16,7 +16,8 @@ function run(el) {
 		y: stage.getHeight()/2,
 		stroke: 'blue',
 		height: 50,
-		width: 50
+		width: 50,
+		rotation: 45	
 	});
 	var line1 = new Kinetic.Line({
 		x:0, 
@@ -34,7 +35,13 @@ function run(el) {
 		x:-rect.getWidth()/2,
 		y:-rect.getHeight()/2
 	});
+	
 	layer.add(rect, line1, line2);
 	stage.add(layer);
-	// console.log('foo');
+	var angularSpeed = Math.PI;
+	var anim = new Kinetic.Animation(function(frame){
+		var diff = frame.timeDiff * angularSpeed / 500;
+		rect.rotate(diff);
+	}, layer);
+	anim.start();
 }
