@@ -1,3 +1,12 @@
+function tweenWrap(tween) {		
+	var promise = new Promise(function(resolve){
+		tween.onFinish = function() {
+			resolve(tween);
+		};		
+	});	
+	return promise;
+}
+
 function run(el) {
 	var stage = new Kinetic.Stage({
 		container: el,
@@ -13,7 +22,8 @@ function run(el) {
 		width: 50,		
 		offset: {
 			x:25, y: 25
-		}	
+		},
+		rotation: 45
 	});
 	
 	var rect2 = new Kinetic.Rect({
@@ -27,11 +37,23 @@ function run(el) {
 	
 	layer.add(rect, rect2);
 	stage.add(layer);
-	var angularSpeed = Math.PI;
-	var anim = new Kinetic.Animation(function(frame){
-		var diff = frame.timeDiff * angularSpeed/10;
-		rect.rotate(diff);
-		rect2.rotate(-diff/2);
-	}, layer);
-	anim.start();
+	
+	var t1 = new Kinetic.Tween({
+		node: rect,
+		duration: 5,
+		rotationDeg: 360
+	});
+
+	var t2 = new Kinetic.Tween({
+		node: rect2,
+		duration: 5,
+		rotationDeg: -360
+	});
+
+	tweenWrap(t1).then(function(){
+		t2.play();
+	});
+	setTimeout(function(){
+		t1.play();
+	}, 5000);	
 }
