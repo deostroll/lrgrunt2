@@ -19,6 +19,12 @@
   ],
   "dependencies": {
     "kineticjs": "~5.1.0",
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "color-js": "~1.0.1"
+  },
+  "overrides" : {
+    "color-js": {
+      "main": "color.js"
+    }
   }
 }
