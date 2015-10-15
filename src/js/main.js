@@ -16,32 +16,28 @@ function run(el) {
 		y: stage.getHeight()/2,
 		stroke: 'blue',
 		height: 50,
-		width: 50,
-		rotation: 45	
-	});
-	var line1 = new Kinetic.Line({
-		x:0, 
-		y:0,
-		points:[0,0, stage.getWidth(), stage.getHeight()],
-		stroke:'red'
-	});
-	var line2 = new Kinetic.Line({
-		x:0, 
-		y:stage.getHeight(),
-		points:[0, 0, stage.getWidth(), -stage.getHeight()],
-		stroke:'red'
-	});
-	rect.move({
-		x:-rect.getWidth()/2,
-		y:-rect.getHeight()/2
+		width: 50,		
+		offset: {
+			x:25, y: 25
+		}	
 	});
 	
-	layer.add(rect, line1, line2);
+	var rect2 = new Kinetic.Rect({
+		x: stage.getWidth()/2,
+		y: stage.getHeight()/2,
+		height: 50,
+		width: 50,
+		offset: {x: 25, y: 25},
+		stroke: 'red'			
+	});
+	
+	layer.add(rect, rect2);
 	stage.add(layer);
 	var angularSpeed = Math.PI;
 	var anim = new Kinetic.Animation(function(frame){
-		var diff = frame.timeDiff * angularSpeed / 500;
+		var diff = frame.timeDiff * angularSpeed/10;
 		rect.rotate(diff);
+		rect2.rotate(-diff/2);
 	}, layer);
 	anim.start();
 }
