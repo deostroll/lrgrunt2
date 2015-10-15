@@ -54,11 +54,15 @@ function run(el) {
 		C.y = params.y - params.radius * Math.sin(a90 + i * params.theta);
 		points.push(C);
 		var circle = new Kinetic.Circle({
+			name: 'circle',
 			x: C.x,
 			y: C.y,
 			radius: params.dia/2,
 			fill: colors[i].toString(),
-			visible: true
+			visible: true,
+			opacity: 0,
+			scaleX: 0,
+			scaleY: 0
 		});		
 
 		layer.add(circle);
@@ -81,12 +85,37 @@ function run(el) {
 		height: h + params.dia,
 		width: w + params.dia,
 		stroke: 'red',
-		visible: false
+		visible:false
 	});
 
 	layer.add(rect);
 	stage.add(layer);
 	
+	var circles = layer.get('.circle');
+	var length = circles.length;	
+	var noop = function() { console.log('done'); };
+	var tarray;
+	circles.map(function(c) {
+		return new Kinetic.Tween({
+			node: c,
+			opacity: 1,
+			duration: 0.5,
+			scaleX: 1,
+			scaleY: 1
+		});
+	})
+	.forEach(function(tween, idx, tweenArrary){
+		if(idx !== length - 1) {
+			tween.onFinish = function() { tweenArrary[idx + 1].play(); };
+		}
+		else {
+			tween.onFinish = noop;
+		}
+		tarray = tweenArrary;
+	});
+
+	var t = tarray[0];
+	setTimeout(t.play.bind(t));
 }
 
 function getRandomColors(n) {
