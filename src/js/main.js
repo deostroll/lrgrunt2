@@ -47,7 +47,10 @@ function run(el) {
 	var t1 = new Kinetic.Tween({
 		node: rect,
 		duration: 5,
-		rotationDeg: 360
+		rotationDeg: 360 + 45,
+		onFinish: function() {
+			t2.play();
+		}
 	});
 
 	var t2 = new Kinetic.Tween({
@@ -56,10 +59,5 @@ function run(el) {
 		rotationDeg: -360
 	});
 
-	tweenWrap(t1).then(function(){
-		t2.play();
-	});
-	setTimeout(function(){
-		t1.play();
-	}, 5000);	
+	setTimeout(t1.play.bind(t1), 3000);
 }
