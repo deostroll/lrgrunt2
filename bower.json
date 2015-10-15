@@ -1,0 +1,24 @@
+{
+  "name": "kin-demo",
+  "version": "0.0.0",
+  "authors": [
+    "deostroll <deostroll@gmail.com>"
+  ],
+  "description": "kinetic experiments",
+  "main": "index.html",
+  "keywords": [
+    "kinetic"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "kineticjs": "~5.1.0",
+    "jquery": "~2.1.4"
+  }
+}
